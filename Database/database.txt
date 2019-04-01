@@ -1,0 +1,83 @@
+create database eventmania;
+
+use eventmania;
+
+create table if not exists volunteer
+(
+fname varchar(50) NOT NULL,
+lname varchar(50) NOT NULL,
+password varchar(100) NOT NULL,
+contactNo varchar(50) NOT NULL, 
+city varchar(100) NOT NULL,
+email varchar(100) PRIMARY KEY,
+qualification varchar(100) NOT NULL,
+fieldOfInterest varchar(100) NOT NULL,
+resume varchar(100)
+)ENGINE=InnoDB;
+
+create table if not exists organiser
+(
+fname varchar(50) NOT NULL,
+lname varchar(50) NOT NULL,
+password varchar(100) NOT NULL,
+contactNo varchar(50) NOT NULL, 
+city varchar(100) NOT NULL,
+email varchar(100) PRIMARY KEY
+)ENGINE=InnoDB;
+
+create table if not exists donar
+(
+fname varchar(50) NOT NULL,
+lname varchar(50) NOT NULL,
+password varchar(100) NOT NULL,
+contactNo varchar(50) NOT NULL, 
+city varchar(100) NOT NULL,
+email varchar(100) PRIMARY KEY
+)ENGINE=InnoDB;
+
+create table if not exists event_details
+(
+eventId int(100) auto_increment PRIMARY KEY,
+eventName varchar(100) NOT NULL,
+organiserEmail varchar(100) NOT NULL,
+venue varchar(100) NOT NULL,
+startDate date NOT NULL,
+endDate date NOT NULL,
+startTime time NOT NULL,
+endTime time NOT NULL,
+noOfVolunteers varchar(100) NOT NULL,
+quotation varchar(100) NOT NULL,
+description text NOT NULL,
+latitude DECIMAL(10, 8) NOT NULL,
+longitude DECIMAL(11, 8) NOT NULL,
+contactDetails varchar(100) NOT NULL,
+FOREIGN KEY (organiserEmail) REFERENCES organiser(email) ON DELETE CASCADE
+)ENGINE=InnoDB auto_increment = 1000;
+
+create table if not exists volunteer_event_rel
+(
+email varchar(100) NOT NULL,
+eventId int(100) NOT NULL,
+isPresent int(50) NOT NULL DEFAULT 0,
+isFeedbackFilled int(50) NOT NULL DEFAULT 0,
+FOREIGN KEY (eventId) REFERENCES event_details(eventId) ON DELETE CASCADE,
+FOREIGN KEY (email) REFERENCES volunteer(email) ON DELETE CASCADE
+)ENGINE=InnoDB;
+
+create table if not exists feedback
+(
+email varchar(100) NOT NULL,
+eventId int(100) NOT NULL,
+
+FOREIGN KEY (eventId) REFERENCES event_details(eventId) ON DELETE CASCADE,
+FOREIGN KEY (email) REFERENCES volunteer(email) ON DELETE CASCADE
+)ENGINE=InnoDB;
+
+create table if not exists paymentDone
+(
+email varchar(100) NOT NULL,
+eventId int(100) NOT NULL,
+transactionId varchar(150) NOT NULL,
+FOREIGN KEY (eventId) REFERENCES event_details(eventId) ON DELETE CASCADE,
+FOREIGN KEY (email) REFERENCES donar(email) ON DELETE CASCADE
+)ENGINE=InnoDB;
