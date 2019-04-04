@@ -158,10 +158,48 @@ doc.image('./images/1.png',535, 0,{
 
 
 
-function ticketGenerator(eventName,fname,lname,rank,club){
+function ticketGenerator(eventname,venue,fname,lname,date){
+   // Create a document
+   const doc = new PDFDocument(
+      {
+         layout: "landscape",
+          size: [200, 615],
+      }
+  );
 
 
+   if (!fs.existsSync('./uploads/tickets')){
+   fs.mkdirSync('./uploads/tickets');
+   }
+   if (!fs.existsSync('./uploads/tickets/'+eventname)){
+   fs.mkdirSync('./uploads/tickets/'+eventname);
+   }
+   // Pipe its output somewhere, like to a file or HTTP response
+   // See below for browser usage
+   doc.pipe(fs.createWriteStream('./uploads/tickets/'+eventname+'/'+fname+" "+lname+'.pdf'));
+   
+   // Embed a font, set the font size, and render some text
+   doc.rect(0, 0, 615, 40).fill('#5f2b97')
 
+   doc.fontSize(20).fill('#FFFFFF')
+   .font('Helvetica-Bold')
+   .text('TICKET', 260, 15);
+   doc.image('./images/randomqr-256.png', 500,100 ,{
+            fit: [70, 70],
+   });
+
+
+   doc.fontSize(16).fill('#OOOOO')
+      .font('Helvetica-Bold')
+      .text('Event: '+eventname+'\nName: '+fname+" "+lname+"\nVenue: "+venue+"\nDate: "+date+"\n", 110, 50);
+      doc.image('./images/randomqr-256.png', 500,100 ,{
+               fit: [70, 70],
+      });
+      
+            
+   // Add an image, constrain it to a given size, and center it vertically and horizontally
+
+   doc.end();
 }
 
 module.exports = { pdf, ticketGenerator };

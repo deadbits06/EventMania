@@ -183,6 +183,17 @@ const md5 = require('md5');
 // 			});	
 // }
 
+function volunteerRegistration(firstName,lastName,hash,contactNumber,city,email,qualification,field_of_interest,resume_path,cb){
+
+	  var sql = "INSERT INTO volunteer VALUES('"+firstName+"','"+lastName+"','"+hash+"','"+contactNumber+"','"+city+"','"+email+"','"+qualification+"','"+field_of_interest+"','"+resume_path+"')";
+	  con.query(sql, function (err, result) {
+	  	cb(err,result);
+	  });
+
+}
+
+
+
 function getCoords(eventId,cb){
 
 		  	var sql = "select latitude,longitude from eventDetails where eventId = '"+eventId+"' ;";
@@ -191,4 +202,36 @@ function getCoords(eventId,cb){
 			});	
 }
 
-module.exports = { getCoords }
+
+function myEvents(email,cb){
+	  		
+	  		var sql = "select eventId,eventName,venue,startTime,startDate,endTime,endDate,description,contactDetails,image from event_details where eventId in(select eventId from volunteer_event_rel where email='"+email+"');";
+			con.query(sql,function(err,result,fields){
+			cb(err,result);
+			});
+
+}
+
+
+
+function event_register(email,eventId,cb){
+	  		
+	  		var sql = "INSERT INTO volunteer_event_rel VALUES('"+email+"','"+eventId+"',0,0)";
+			con.query(sql,function(err,result,fields){
+			cb(err,result);
+			});
+
+}
+
+
+
+function myCertificates(email,cb){
+	  		
+	  		var sql = "select eventId,eventName,venue,startTime,startDate,endTime,endDate,description,contactDetails,image from event_details where organiserEmail = '"+email+"';";
+			con.query(sql,function(err,result,fields){
+			cb(err,result);
+			});
+
+}
+
+module.exports = { getCoords, volunteerRegistration, myEvents, myCertificates, event_register }

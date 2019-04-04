@@ -1,6 +1,6 @@
 var nodemailer = require('nodemailer');
 
-function sendMail(name,password,email){
+function sendMail(name,password,email,role){
 
   var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -13,7 +13,7 @@ function sendMail(name,password,email){
   var mailOptions = {
     from: 'eventmania82@gmail.com',
     to: email,
-    subject: 'Account created from EventMania',
+    subject: 'Account created as '+role+' from EventMania',
     text: 'Hey '+name+', Admin here. You have been successfully registered on EventMania and your password is '+password+'.\n\n\n\nThanks and Regards,Admin :)'
   };
 
@@ -27,7 +27,7 @@ function sendMail(name,password,email){
 }
 
 
-function sendTicket(name,eventName,email,attachment){
+function sendTicket(name,eventName,email,attachment,cb){
 
   var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -55,7 +55,9 @@ function sendTicket(name,eventName,email,attachment){
     } else {
       console.log('Email sent: ' + info.response);
     }
+      cb(error,info);
   });
+
 }
 
 

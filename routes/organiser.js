@@ -15,7 +15,10 @@ const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const NodeGeocoder = require('node-geocoder');
-const QRCode = require('qrcode')
+const QRCode = require('qrcode');
+var MapboxClient = require('mapbox')
+//var json2csv = require('json2csv');
+
  
 // QRCode.toFile('C:/wamp/www/EventMania/files/quotation.png', 'Some text', {
 //   color: {
@@ -32,95 +35,12 @@ const mail = require('../functions/mail.js');
 //const pdfObj = require('../functions/pdf.js');
 
 
-// router.get('/home',(req,res)=>{
-
-// 	console.log("inside");
-// 	if (req.session.designation) {
-// 		console.log(req.session.designation);
-// 		console.log("in session");
-// 		res.render("home", {userId: req.session.designation, roles: req.session.roles});
-// 	}
-// 	else{
-// 		console.log("out session");
-// 		res.render("home");
-// 	}
-// });
-
-
-
-
-router.get('/login', function(req,res){
-	res.render("login");
-});
-
-
-router.post('/login',(req,res)=>{
-
-	var email = req.body.email;
-	var password = req.body.pass;
-	var hash = md5(password);
-
-	database.login(email,hash,function(err,result){
-
-		if(err) throw err;
-			if(result.length==1)
-			{	
-				console.log(hash);
-				var temp_pass = JSON.stringify(result[0].password);
-				var temp2_pass= temp_pass.replace(/\"/g, "");
-
-				if(hash == temp2_pass){
-					console.log("Correct password "+temp_pass);
-					res.redirect("home");
-
-				}
-				else{
-					console.log("Incorrect password");
-					res.render("login");
-				}
-			}
-			else{
-				console.log("Please Register First");
-				res.render("login");	
-			}
-	});
-
-});
-
-
-//Organiser Registration
-router.post('/organiser_register',(req,res)=>{
-
-	var firstName = req.body.fname;
-	var lastName = req.body.lname;
-	var email = req.body.email;
-	var password = req.body.password;
-	var contactNumber = req.body.contactNo;
-	var city = req.body.city;
-	var hash = md5(password);
-	console.log(password);
-	console.log(hash);
-
-
-	database.organiserRegistration(firstName,lastName,hash,contactNumber,city,email,function(err,result){
-		if (err){ 
-		throw err;
-	    res.sendStatus(400);
-	    }
-	    console.log("1 record inserted");
-	    mail.sendMail(firstName,password,email);
-
-	});
-});
-
-
-
 const storage = multer.diskStorage({
 	destination : function(req,file,cb){
 		console.log("inside storage");
 		var organiserEmail = req.body.organiserEmail;
 		var eventName = req.body.eventName;
-		const dir = './uploads/'+organiserEmail+'/'+eventName;
+		const dir = './uploads/organiser/'+organiserEmail+'/'+eventName;
 		mkdirp(dir, err => cb(null, dir));//+club+'/'+event
 	},
 	filename : function(req,file,cb){
@@ -131,39 +51,40 @@ const storage = multer.diskStorage({
 
 var upload = multer({ storage: storage })
 
-
-//Event Registration
-router.post('/event_register',upload.single('Quotation'),(req,res)=>{
-	
-	console.log(req.file);
-	var eventName = req.body.eventName;
-	var organiserEmail = req.body.organiserEmail;
-	var venue = req.body.venue;
-	//var startDate = req.body.startDate;
-	//var endDate = req.body.endDate;
-	//var startTime = req.body.startTime;
-	//var endTime = req.body.endTime;
-	var noOfVolunteers = req.body.noOfVolunteers;
-	var description = req.body.description;
-	var contactDetails = req.body.contactDetails;
-	var temp = req.file.destination.split('.')
-	var path = temp[1]+'.'+temp[2];
-	var quotation = "192.168.43.19/EventMania"+path;
-	console.log(quotation);
-
-	var latitude;
-	var longitude;
+var client = new MapboxClient('pk.eyJ1IjoiZHluYW1vMjgxOCIsImEiOiJjanUxZ3prMmMwMWt0NGJwYXZpNDk5NXg4In0.M_GgSOEjSUkEFQI7PhR7Jw')
 
 
 
+router.get('/register',(req,res)=>{
 
-	// database.eventRegistration(eventName,organiserEmail,venue,startDate,endDate,startTime,endTime,noOfVolunteers,quotation,description,latitude,longitude,contactDetails,function(err,result){
-	// 	if (err){ 
-	// 	throw err;
-	//     res.sendStatus(400);
-	//     }
-	//     console.log("1 record inserted");
-	// });
+	res.render("organiser");
+
+})
+
+//Organiser Registration
+router.post('/register',(req,res)=>{
+
+	var firstName = req.body.fname;
+	var lastName = req.body.lname;
+	var email = req.body.email;
+	var password = req.body.password;
+	var contactNumber = req.body.contactNo;
+	var city = req.body.city;
+	var instituteName = req.body.instituteName;
+	var hash = md5(password);
+	console.log(password);
+	console.log(hash);
+
+
+	database.organiserRegistration(firstName,lastName,hash,contactNumber,city,email,instituteName,function(err,result){
+		if (err){ 
+		throw err;
+	    res.sendStatus(400);
+	    }
+	    console.log("1 record inserted");
+	    mail.sendMail(firstName,password,email,"Organiser");
+	    res.redirect("/home");
+	});
 });
 
 
@@ -171,28 +92,153 @@ router.post('/event_register',upload.single('Quotation'),(req,res)=>{
 
 
 
-router.post('/test',(req,res)=>{
-	var location = req.body.location;
-	console.log(location);
-	mail.sendTicket("name","eventName","nimbalkarnishant98@gmail.com")
-	var options = {
-	  provider: 'google',
-	 
-	  // Optional depending on the providers
-	  httpAdapter: 'https', // Default
-	  apiKey: 'YOUR_API_KEY', // for Mapquest, OpenCage, Google Premier
-	  formatter: null         // 'gpx', 'string', ...
-	};
-	 
-	var geocoder = NodeGeocoder(options);
-	 
-	// Using callback
-	geocoder.geocode('29 champs elysée paris', function(err, res) {
-	  console.log(res);
+router.get('/event_register',(req,res)=>{
+	if (req.session.email) {
+
+	res.render("eventRegister");
+	}
+	else{
+		res.redirect("/login");
+	}
+
+});
+
+router.get('/fullEvent',(req,res)=>{
+	if (req.session.email) {
+		res.render("fullEvent");
+	}
+	else{
+		res.redirect("/login");
+	}
+
+});
+
+//Event Registration
+router.post('/event_register',upload.array('Quotation'),(req,res)=>{
+	if (req.session.email) {
+	
+	console.log(req.files);
+	var eventName = req.body.eventName;
+	var organiserEmail = req.body.organiserEmail;
+	var venue = req.body.venue;
+	var startDate = req.body.start_date;
+	var endDate = req.body.end_date;
+	var startTime = req.body.start_time;
+	var endTime = req.body.end_time;
+	var noOfVolunteers = req.body.noOfVolunteer;
+	var description = req.body.description;
+	var contactDetails = req.body.contactNumber;
+
+	console.log(req.files[0].originalname);
+
+	var temp = req.files[0].destination.split('.')
+	var path = temp[1]+'.'+temp[2];
+	console.log(path);
+
+
+	var temp1 = req.files[1].destination.split('.')
+	var path2 = temp1[1]+'.'+temp1[2];
+	console.log(path2);
+	var quotation = "192.168.43.19/EventMania"+path+"/"+req.files[0].originalname;
+	var image = "192.168.43.19/EventMania"+path2+"/"+req.files[1].originalname;
+	console.log(quotation);
+	console.log(image);
+
+	client.geocodeForward(venue, function (err, data, res1) {
+	  console.log(data['features'][0]['geometry']['coordinates'])
+	  var temp = data['features'][0]['geometry']['coordinates'];
+	  var latitude = temp[1]
+	  var longitude = temp[0]
+	  console.log(latitude);
+
+	database.eventRegistration(eventName,organiserEmail,venue,startDate,endDate,startTime,endTime,noOfVolunteers,quotation,description,latitude,longitude,contactDetails,image,function(err,result){
+		if (err){ 
+		throw err;
+	    res.sendStatus(400);
+	    }
+	    console.log("1 record inserted");
+	    res.redirect("/home");
 	});
 
 
+	});
+	}
+	else{
+		res.redirect("/login")
+	}
+});
 
-})
+
+router.get('/myEvents',function(req,res){
+	if (req.session.email) {
+
+	var email = req.session.email;
+	console.log("inside myEvents "+email);
+	database.myEvents(email,function(err,result){
+		if (err){ 
+		throw err;
+	    res.sendStatus(400);
+	    }
+	    console.log(result);
+	    res.render("myEvents",{results:result});
+	});
+	}
+	else{
+		res.redirect("/login");
+	}
+});
+
+
+router.post('/getVolunteers',function(req,res){
+
+	if (req.session.email) {
+
+	var email = req.session.email;
+	var eventId = req.body.eventId;
+
+	console.log(" Event Id is " +eventId);
+	console.log("inside myEvents "+email);
+	    database.getRegisteredVolunteers(eventId,function(err,result){
+	    if (err){ 
+		throw err;
+	    res.sendStatus(400);
+	    }
+	    console.log(result);
+	    res.render("getVolunteers",{volunteers:result});
+	    });
+	}
+	else{
+		res.redirect("/login");
+	}
+
+});
+
+
+router.get('/download',function(req,res){
+
+	//var eventId = req.session.email;
+	//var eventId = ;
+	var eventId = 1002;
+
+	database.getRegisteredVolunteers(eventId,function(err,result){
+		if (err){ 
+		throw err;
+	    res.sendStatus(400);
+	    }
+	    console.log(result);
+
+	    json2csv({data: result, fields: ['First Name', 'Last Name', 'Contact Number']}, function(err, csv) {
+		  if (err) console.log(err);
+		  fs.writeFile('file.csv', csv, function(err) {
+		    if (err) throw err;
+		    console.log('file saved');
+		  });
+		});
+
+	    res.render("myEvents");
+	});
+});
+
+
 
 module.exports = router;
