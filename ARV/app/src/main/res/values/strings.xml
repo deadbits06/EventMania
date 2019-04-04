@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">EventMania</string>
+    <string name="all_event">All Events</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="my_event">My Events</string>
+
+</resources>
