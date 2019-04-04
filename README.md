@@ -21,9 +21,10 @@ will be getting a notification regarding the event. If the person is interested 
 ## Technology stack
 1.  Bootstrap
 2.  HTML
-3.  NodeJS
-4.  PHP
-5.  Android
+3.  CSS
+4.  NodeJS
+5.  PHP
+6.  Android
 
 ## Contributers
 1.  Nishant Nimbalkar
