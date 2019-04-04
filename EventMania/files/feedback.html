@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Page-->
+    <title>Feedback form</title>
+
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="css/main.css" rel="stylesheet" media="all">
+    <style>
+      .star-rating {
+        line-height:32px;
+        font-size:1.25em;
+}
+.star-rating .fa-star{color: yellow;}
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Feedback Form</h2>
+                    <form method="POST">
+                        <div class="row row-space">
+                                <div class="input-group">
+                                    <label class="label">name</label>
+                                    <input class="input--style-4" type="text" name="first_name">
+                                </div>
+                        </div>
+
+
+                        <div class="row row-space">
+                                <div class="input-group">
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4" type="email" name="email">
+                                </div>
+                        </div>
+                        <div class="row row-space">
+                                <div class="input-group">
+                                    <label class="label">Overall, how was the event?</label>
+                                    <div class="star-rating">
+                                      <span class="fa fa-star-o" data-rating="1"></span>
+                                      <span class="fa fa-star-o" data-rating="2"></span>
+                                      <span class="fa fa-star-o" data-rating="3"></span>
+                                      <span class="fa fa-star-o" data-rating="4"></span>
+                                      <span class="fa fa-star-o" data-rating="5"></span>
+                                      <input type="hidden" name="val" class="rating-value" value="">
+                                    </div>
+
+                                  </div>
+                        </div>
+                        <div class="row row-space">
+                                <div class="input-group">
+                                    <label class="label">Was the event helpful?</label>
+                                    <div class="star-rating">
+                                      <span class="fa fa-star-o" data-rating="1"></span>
+                                      <span class="fa fa-star-o" data-rating="2"></span>
+                                      <span class="fa fa-star-o" data-rating="3"></span>
+                                      <span class="fa fa-star-o" data-rating="4"></span>
+                                      <span class="fa fa-star-o" data-rating="5"></span>
+                                      <input type="hidden" name="val" class="rating-value" value="2.56">
+                                    </div>
+
+                                </div>
+
+                        </div>
+                        <div class="row row-space">
+                                <div class="input-group">
+                                    <label class="label">How likely are you to participate in a similar event? </label>
+                                    <div class="star-rating">
+                                      <span class="fa fa-star-o" data-rating="1"></span>
+                                      <span class="fa fa-star-o" data-rating="2"></span>
+                                      <span class="fa fa-star-o" data-rating="3"></span>
+                                      <span class="fa fa-star-o" data-rating="4"></span>
+                                      <span class="fa fa-star-o" data-rating="5"></span>
+                                      <input type="hidden" name="val" class="rating-value" value="2.56">
+                                    </div>
+
+                                </div>
+
+                        </div>
+                        <div class="row row-space">
+                                <div class="input-group">
+                                    <label class="label">How likely are you to recommend this event to someone? </label>
+                                    <div class="star-rating">
+                                      <span class="fa fa-star-o" data-rating="1"></span>
+                                      <span class="fa fa-star-o" data-rating="2"></span>
+                                      <span class="fa fa-star-o" data-rating="3"></span>
+                                      <span class="fa fa-star-o" data-rating="4"></span>
+                                      <span class="fa fa-star-o" data-rating="5"></span>
+                                      <input type="hidden" name="val" class="rating-value" value="2.56">
+                                    </div>
+
+                                </div>
+
+                        </div>
+                        <div class="row row-space">
+                                <div class="input-group">
+                                    <label class="label">How well was the event structured? </label>
+                                    <div class="star-rating">
+                                      <span class="fa fa-star-o" data-rating="1"></span>
+                                      <span class="fa fa-star-o" data-rating="2"></span>
+                                      <span class="fa fa-star-o" data-rating="3"></span>
+                                      <span class="fa fa-star-o" data-rating="4"></span>
+                                      <span class="fa fa-star-o" data-rating="5"></span>
+                                      <input type="hidden" name="val" class="rating-value" value="2.56">
+                                    </div>
+
+                                </div>
+
+                        </div>
+                        <div class="row row-space">
+                                <div class="input-group">
+                                    <label class="label">Were the responsibilities as a volunteer properly conveyed? </label>
+                                    <div class="star-rating">
+                                      <span class="fa fa-star-o" data-rating="1"></span>
+                                      <span class="fa fa-star-o" data-rating="2"></span>
+                                      <span class="fa fa-star-o" data-rating="3"></span>
+                                      <span class="fa fa-star-o" data-rating="4"></span>
+                                      <span class="fa fa-star-o" data-rating="5"></span>
+                                      <input type="hidden" name="val" class="rating-value" value="2.56">
+                                    </div>
+
+                                </div>
+
+                        </div>
+
+
+                        <div class="row row-space">
+                                <div class="input-group">
+                                    <label class="label">Your Review</label>
+                                    <textarea name="review" rows="8" cols="80" placeholder="Type here..."></textarea>
+                                </div>
+                        </div>
+
+
+
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+
+
+</body>
+<script type="text/javascript">
+var $star_rating = $('.star-rating .fa');
+
+var SetRatingStar = function() {
+  return $star_rating.each(function() {
+    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+      return $(this).removeClass('fa-star-o').addClass('fa-star');
+    } else {
+      return $(this).removeClass('fa-star').addClass('fa-star-o');
+    }
+  });
+};
+
+$star_rating.on('click', function() {
+  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+  return SetRatingStar();
+});
+
+SetRatingStar();
+$(document).ready(function() {
+
+});
+</script>
+
+</html>
+<!-- end document-->

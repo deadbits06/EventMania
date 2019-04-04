@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>home</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="icon" type="image/png" href="/images/small_logo.png"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+	<style type="text/css">
+		html {
+  			scroll-behavior: smooth;
+		}
+
+		* {
+  			box-sizing: border-box;
+  			margin:0;
+  			padding: 0;
+		}
+
+		#navbar{
+			/* background-color: rgba(0,0,0,0.5); */
+			top: 0;
+			position: fixed; 
+			width: 100%; 
+			top: 0; 
+			z-index: 999;
+		}
+
+		/* #navbar:hover{
+			background-color: rgb(0,0,0);
+		} */
+
+		h2, ul>li>a, ul>li>p{
+			color: black;
+		}
+
+		.nav-item{
+			margin-right: 1vh;
+		}
+	</style>
+
+</head>
+<body>
+	
+	<div>
+		
+		<div style="top: 0; width: 100%;font-size: 18px;">
+			<nav class="navbar navbar-expand-sm" id="navbar" onscroll="">
+
+				<a href="#" class="navbar-brand"><img src="/images/event_logo.png" alt="eventMaina" width="50" height="50"><span style="font-size:30px;color: black; font-weight: bold; margin-left:2vh;">EventMania</span></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+			<div class="collapse navbar-collapse d-flex justify-content-end" id="collapsibleNavbar">
+			
+				<ul class="navbar-nav"> 
+					<li class="nav-item">
+						<a href="/home" class="nav-link"><i class='fa fa-home' style='font-size:20px; margin-right:0.5vh;'></i>Home</a>
+					</li>
+
+					<% if(roles == "organiser"){ %>
+					<li class="nav-item">
+						<a href="/organiser/event_register" class="nav-link"><i class="fa fa-calendar-check-o" style="font-size:20px; margin-right:0.5vh;"></i>Event Register</a>
+					</li>
+					<li class="nav-item">
+						<a href="/organiser/myEvents" class="nav-link"><i class="fa fa-id-card" style="font-size:20px; margin-right:0.5vh;"></i>My Events</a>
+					</li>
+					<% } %>
+
+					<% if(roles == "volunteer"){ %>
+					<li class="nav-item">
+						<a href="/volunteer/myEvents" class="nav-link"><i class="fa fa-address-card-o" style="font-size:20px; margin-right:0.5vh;"></i>My Events</a>
+					</li>
+					<li class="nav-item">
+						<a href="/volunteer/myCertificates" class="nav-link"><i class="fa fa-id-card" style="font-size:20px; margin-right:0.5vh;"></i>My Certificates</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link"><i class="fa fa-exclamation-circle" style="font-size:20px; margin-right:0.5vh;"></i>Notification</a>
+					</li>
+					<% } %>
+
+					<% if(!(roles == "volunteer" || roles == "organiser" || roles == "donar")){ %>
+					<li class="nav-item">
+						<p data-toggle="modal" data-target="#signUp" onmouseover="this.style.color='blue'" onmouseleave="this.style.color='black'" style="margin-top:1.1vh; cursor:pointer;"><i class="fa fa-user-plus" style="font-size:20px; margin-right:0.5vh;"></i>Register</p>
+
+						<div id="signUp" class="modal fade" role="dialog" style="z-index:999999;" data-backdrop="false">
+							<div class="modal-dialog">
+
+							    <div class="modal-content">
+							    	<div class="modal-header">
+							    		<h4 class="modal-title">Registration form</h4>
+							        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+							    	</div>
+							    	<div class="modal-body">
+							        	<a href="/volunteer/register" class="nav-link"><i class="fa fa-users" style='font-size:20px; margin-right:2vh;'></i>Volunteer</a>
+							        	<a href="/organiser/register" class="nav-link"><i class="fa fa-user" style="font-size:20px; margin-right:2vh;"></i> Organizer</a>
+							        	<a href="/donar/register" class="nav-link"><i class="fa fa-user-plus" style="font-size:20px; margin-right:2vh;"></i>Donar</a>
+							        	
+							    	</div>
+							    	<div class="modal-footer">
+							        	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							    	</div>
+							    </div>
+
+							</div>
+						</div>
+					</li>
+					<% } %>
+
+					<% if(roles == "volunteer" || roles == "organiser" || roles == "donar"){ %>
+					<li class="nav-item">
+						<a href="/logout" class="nav-link"><i class="fa fa-sign-out" style="font-size:20px; margin-right:0.5vh;"></i>Logout</a>
+					</li>
+					<% }else{ %>
+					<li class="nav-item">
+						<a href="/login" class="nav-link"><i class="fas fa-user-tie" style="font-size:20px; margin-right:1vh;"></i>Login</a>
+					</li>
+					<% } %>
+
+				</ul>
+			</div>
+			</nav>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+		
+		$(document).ready(function(){
+		  $(window).scroll(function(){
+		  	var scroll = $(window).scrollTop();
+			  if (scroll > 75) {
+			    $("#navbar").css("background" , "gray");
+			  }
+
+			  else{
+				  $("#navbar").css("background" , "");  	
+			  }
+		  })
+		})
+
+	</script>
+
+</body>
+</html>

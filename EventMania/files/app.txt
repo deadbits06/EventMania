@@ -1,0 +1,7 @@
+var MapboxClient = require('mapbox')
+
+var client = new MapboxClient('pk.eyJ1IjoiZHluYW1vMjgxOCIsImEiOiJjanUxZ3prMmMwMWt0NGJwYXZpNDk5NXg4In0.M_GgSOEjSUkEFQI7PhR7Jw')
+
+client.geocodeForward('Chester, NJ', function (err, data, res) {
+  console.log(data['features'][0]['geometry']['coordinates'])
+})
