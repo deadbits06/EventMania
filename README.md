@@ -1,3 +1,8 @@
+<div align="center" style="width=100%">
+
+![EventMania](https://imgur.com/4KREu6V.png)
+</div>
+
 # EventMania
 
 A mobile and web platform for organisations to arrange events, find volunteers and raise funds for events.
@@ -35,7 +40,7 @@ $ npm install
 ```
 Running the server
 ```
-$ node server.js
+$ node app.js
 ```
 
 ## Technology stack
@@ -43,7 +48,7 @@ $ node server.js
 2.  HTML
 3.  CSS
 4.  NodeJS
-5.  PHP
+5.  Python
 6.  Android
 
 ## Contributers
