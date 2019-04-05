@@ -1,7 +1,3 @@
-<div align="center" style="width=100%">
-
-![EventMania](https://imgur.com/4KREu6V.png)
-</div>
 
 # EventMania
 
@@ -56,5 +52,5 @@ $ node app.js
 2.  <a href="https://github.com/Jaykukreja">Jayesh Kukreja</a>
 3.  <a href="https://github.com/pawanabc59" >Pawankumar Maurya</a>
 4.  <a href="https://github.com/alok217" >Alok Pandey</a>
-5.  <a href="https://github.com/" >Deepika Naik</a>
-6.  <a href="https://github.com/">Vishal Choutele</a>
+5.  <a href="https://github.com/deepika42" >Deepika Naik</a>
+6.  <a href="https://github.com/vishalchoutele123">Vishal Choutele</a>
