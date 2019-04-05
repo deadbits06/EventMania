@@ -1,4 +1,7 @@
-
+<div align="center">
+  
+![Eventmania](https://i.imgur.com/RHzYyuK.png)
+</div>
 # EventMania
 
 A mobile and web platform for organisations to arrange events, find volunteers and raise funds for events.
