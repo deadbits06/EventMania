@@ -3,7 +3,7 @@
 ![Eventmania](https://i.imgur.com/RHzYyuK.png)
 
 [![Hackathon](https://img.shields.io/badge/hackathon-RAIT-brightgreen.svg)](http://innowait.co.in/) 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 
 </div>
