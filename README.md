@@ -17,6 +17,18 @@ The application has 3 main entities:
 7.  Certificate of participation will be sent to the volunteer to encourage active participation in social events, which will be stored in server's file system. The volunteer can get access to certificates at anytime.
 8.  Sentiment analysis will be generated from the feedbacks given by the volunteers to analyse the success of the event, thereby increasing authenticity and rank of the organisers in social activities.
 
+## Installation
+Installing NodeJs
+```
+$ sudo apt-get install nodejs
+```
+Installing [Android Studio](https://developer.android.com/studio/)
+
+Cloning the rep
+```
+$ git clone https://github.com/deadbits06/EventMania.git
+```
+
 ## Technology stack
 1.  Bootstrap
 2.  HTML
@@ -26,9 +38,9 @@ The application has 3 main entities:
 6.  Android
 
 ## Contributers
-1.  Nishant Nimbalkar
-2.  Jayesh Kukreja
-3.  Pawankumar Maurya
-4.  Alok Pandey
-5.  Deepika Naik
-6.  Vishal Choutele
+1.  <a href="#">Nishant Nimbalkar</a>
+2.  <a href="#">Jayesh Kukreja</a>
+3.  <a href="#">Pawankumar Maurya</a>
+4.  <a href="https://github.com/alok217" >Alok Pandey</a>
+5.  <a href="#" >Deepika Naik</a>
+6.  <a href="#">Vishal Choutele</a>
