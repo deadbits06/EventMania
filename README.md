@@ -24,9 +24,18 @@ $ sudo apt-get install nodejs
 ```
 Installing [Android Studio](https://developer.android.com/studio/)
 
-Cloning the rep
+Cloning the repo
 ```
 $ git clone https://github.com/deadbits06/EventMania.git
+```
+Installing the dependencies
+```
+$ cd EventMania
+$ npm install
+```
+Running the server
+```
+$ node server.js
 ```
 
 ## Technology stack
@@ -38,9 +47,9 @@ $ git clone https://github.com/deadbits06/EventMania.git
 6.  Android
 
 ## Contributers
-1.  <a href="#">Nishant Nimbalkar</a>
-2.  <a href="#">Jayesh Kukreja</a>
-3.  <a href="#">Pawankumar Maurya</a>
+1.  <a href="https://github.com/Nishant98">Nishant Nimbalkar</a>
+2.  <a href="https://github.com/Jaykukreja">Jayesh Kukreja</a>
+3.  <a href="https://github.com/pawanabc59" >Pawankumar Maurya</a>
 4.  <a href="https://github.com/alok217" >Alok Pandey</a>
-5.  <a href="#" >Deepika Naik</a>
-6.  <a href="#">Vishal Choutele</a>
+5.  <a href="https://github.com/" >Deepika Naik</a>
+6.  <a href="https://github.com/">Vishal Choutele</a>
